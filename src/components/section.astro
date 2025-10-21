@@ -1,0 +1,60 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  backgroundColor?: string;
+  padding?: string;
+}
+
+const { 
+  title = "",
+  subtitle = "",
+  backgroundColor = "transparent",
+  padding = "60px 20px"
+} = Astro.props;
+---
+
+<section class="section" style={`background: ${backgroundColor}; padding: ${padding};`}>
+  <div class="section-container">
+    {title && <h2 class="section-title">{title}</h2>}
+    {subtitle && <p class="section-subtitle">{subtitle}</p>}
+    <div class="section-content">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    width: 100%;
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-content {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+</style>

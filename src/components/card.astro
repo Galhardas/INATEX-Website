@@ -1,0 +1,77 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+const { 
+  title,
+  description,
+  icon = "📊",
+  buttonText = "Saber Mais",
+  buttonLink = "#"
+} = Astro.props;
+---
+
+<div class="card">
+  <div class="card-icon">{icon}</div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-description">{description}</p>
+  <a href={buttonLink} class="card-button">{buttonText}</a>
+</div>
+
+<style>
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 350px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .card-description {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-button {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .card-button:hover {
+    background: #2980b9;
+  }
+</style>
