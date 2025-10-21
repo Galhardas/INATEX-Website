@@ -5,6 +5,8 @@ export interface Props {
   icon?: string;
   buttonText?: string;
   buttonLink?: string;
+  size?: "small" | "medium" | "large" | "auto";
+  className?: string;
 }
 
 const { 
@@ -12,11 +14,13 @@ const {
   description,
   icon = "📊",
   buttonText = "Saber Mais",
-  buttonLink = "#"
+  buttonLink = "#",
+  size = "medium",
+  className = ""
 } = Astro.props;
 ---
 
-<div class="card">
+<div class={`card card--${size} ${className}`}>
   <div class="card-icon">{icon}</div>
   <h3 class="card-title">{title}</h3>
   <p class="card-description">{description}</p>
@@ -30,9 +34,34 @@ const {
     padding: 2rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 350px;
     text-align: center;
     border: 1px solid #e9ecef;
+    height: fit-content;
+  }
+
+  /* Size Variants */
+  .card--small {
+    max-width: 280px;
+    min-width: 250px;
+    padding: 1.5rem;
+  }
+
+  .card--medium {
+    max-width: 350px;
+    min-width: 300px;
+    padding: 2rem;
+  }
+
+  .card--large {
+    max-width: 420px;
+    min-width: 350px;
+    padding: 2.5rem;
+  }
+
+  .card--auto {
+    max-width: 100%;
+    min-width: 250px;
+    width: 100%;
   }
 
   .card:hover {
@@ -45,6 +74,14 @@ const {
     margin-bottom: 1rem;
   }
 
+  .card--small .card-icon {
+    font-size: 2.5rem;
+  }
+
+  .card--large .card-icon {
+    font-size: 3.5rem;
+  }
+
   .card-title {
     font-size: 1.5rem;
     color: #2c3e50;
@@ -52,10 +89,26 @@ const {
     font-weight: 600;
   }
 
+  .card--small .card-title {
+    font-size: 1.3rem;
+  }
+
+  .card--large .card-title {
+    font-size: 1.7rem;
+  }
+
   .card-description {
     color: #7f8c8d;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+  }
+
+  .card--small .card-description {
+    font-size: 0.9rem;
+  }
+
+  .card--large .card-description {
+    font-size: 1.1rem;
   }
 
   .card-button {
@@ -73,5 +126,27 @@ const {
 
   .card-button:hover {
     background: #2980b9;
+  }
+
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    .card {
+      max-width: 100% !important;
+      min-width: unset !important;
+      margin: 0 1rem;
+    }
+    
+    .card--auto {
+      margin: 0;
+    }
+  }
+
+  /* Flexbox compatibility */
+  .card {
+    flex: 0 1 auto;
+  }
+  
+  .card--auto {
+    flex: 1 1 0%;
   }
 </style>
